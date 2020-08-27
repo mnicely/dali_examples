@@ -1,6 +1,9 @@
 # dali_examples
 Parallelize ExternalSource to maximize loading pipeline
 
+### Note:
+This example expects clean data
+
 ### Environment
 ```bash
 conda create --name dali
