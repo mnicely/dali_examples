@@ -5,6 +5,7 @@ Parallelize ExternalSource to maximize loading pipeline
 ```bash
 conda create --name dali
 conda activate dali
+conda install pip -y
 pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/weekly nvidia-dali-weekly-cuda100
 pip install aiapy
 ```
