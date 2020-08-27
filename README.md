@@ -2,7 +2,8 @@
 Parallelize ExternalSource to maximize the loading pipeline
 
 ### Note:
-This example expects clean data
+1. This example expects clean data
+2. More comments in files
 
 ### Environment
 ```bash
