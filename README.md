@@ -1,5 +1,5 @@
 # dali_examples
-Parallelize ExternalSource to maximize loading pipeline
+Parallelize ExternalSource to maximize the loading pipeline
 
 ### Note:
 This example expects clean data
