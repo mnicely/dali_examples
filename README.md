@@ -48,4 +48,4 @@ Time(%)     Time (ns)     Instances   Avg (ns)        Min (ns)      Max (ns)    
 
 1. v2 is ~3.0x faster than v1
 2. v3 is ~2.2x faster than v1
-3. v4 is ~5.0x faster than v1
+3. v4 is ~4.5x faster than v1
