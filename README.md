@@ -22,30 +22,30 @@ Version 1 (**--num_read_processes=16 --batch_size=16**)
 ```bash
 Time(%)     Time (ns)     Instances   Avg (ns)        Min (ns)      Max (ns)      Range                                                         
 ----------  ------------  ----------  --------------  ------------  ------------  ------
-97.7        81288488231   1           81288488231.0   81288488231   81288488231   run
+96.9        70224833901   1           70224833901.0   70224833901   70224833901   run
 ```
 
 Version 2 (**--num_read_processes=16 --batch_size=16 --num_gpus=4**)
 ```bash
 Time(%)     Time (ns)     Instances   Avg (ns)        Min (ns)      Max (ns)      Range 
 ----------  ------------  ----------  --------------  ------------  ------------  ------
-100.0       26487050531   1           26487050531.0   26487050531   26487050531   run
+100.0       23609338458   1           23609338458.0   23609338458   23609338458   run
 ```
 
 Version 3 (**--num_read_processes=16 --batch_size=16**)
 ```bash
 Time(%)     Time (ns)     Instances   Avg (ns)        Min (ns)      Max (ns)      Range                                                         
 ----------  ------------  ----------  --------------  ------------  ------------  ------
-93.4        35934472941   1           35934472941.0   35934472941   35934472941   run 
+95.0        34849683649   1           34849683649.0   34849683649   34849683649   run 
 ```
 
 Version 4 (**--num_read_processes=16 --batch_size=16 --num_gpus=4**)
 ```bash
 Time(%)     Time (ns)     Instances   Avg (ns)        Min (ns)      Max (ns)      Range 
 ----------  ------------  ----------  --------------  ------------  ------------  ------
-100.0       16306502147   1           16306502147.0   16306502147   16306502147   run
+100.0       15935145551   1           15935145551.0   15935145551   15935145551   run
 ```
 
-1. V2 is ~3.0x faster than V1
-2. V3 is ~2.2x faster than V1
-3. V4 is ~5.0x faster than V1
+1. v2 is ~3.0x faster than v1
+2. v3 is ~2.2x faster than v1
+3. v4 is ~5.0x faster than v1
