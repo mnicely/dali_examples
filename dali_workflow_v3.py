@@ -42,7 +42,7 @@ import numpy as np
 import os
 from glob import glob
 
-import sunpy.map
+from astropy.io import fits
 
 import nvidia.dali.ops as ops
 from nvidia.dali.pipeline import Pipeline
@@ -59,14 +59,18 @@ class ExternalInputIterator(object):
         # Need a better way to deal with sharding
         if index >= self.n:
             fits_filename = self.files[0]
-            f = sunpy.map.Map(fits_filename)
-            return np.ones(shape=f.data.shape, dtype=np.int16) * -99
+            with fits.open(fits_filename) as hdul:
+                hdul[1].verify('silentfix+warn')  # oftentimes the headers are broken; fix them or astropy will complain
+                data = hdul[1].data
+            return np.ones(shape=data.shape, dtype=np.int16) * -99
 
         else:
             fits_filename = self.files[index]
-            f = sunpy.map.Map(fits_filename)
-            print(index, fits_filename)
-            return f.data
+            with fits.open(fits_filename) as hdul:
+                hdul[1].verify('silentfix+warn')  # oftentimes the headers are broken; fix them or astropy will complain
+                data = hdul[1].data
+            # print(index, fits_filename)
+            return data
 
     def __init__(self, batch_size, img_list):
         self.batch_size = batch_size

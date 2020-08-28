@@ -41,7 +41,7 @@ import argparse
 import os
 from glob import glob
 
-import sunpy.map
+from astropy.io import fits
 
 import nvidia.dali.ops as ops
 from nvidia.dali.pipeline import Pipeline
@@ -65,9 +65,11 @@ class ExternalInputIterator(object):
         batch = []
         for _ in range(self.batch_size):
             fits_filename = self.files[self.i]
-            f = sunpy.map.Map(fits_filename)
-            batch.append(f.data)
-            print(self.i, fits_filename)
+            with fits.open(fits_filename) as hdul:
+                hdul[1].verify('silentfix+warn')  # oftentimes the headers are broken; fix them or astropy will complain
+                data = hdul[1].data
+            batch.append(data)
+            # print(self.i, fits_filename)
             self.i = (self.i + 1) % self.n
         return (batch,)
 
@@ -87,8 +89,6 @@ class ExternalSourcePipeline(Pipeline):
 def run(args):
     img_list = glob(os.path.join(args.imageFolder, "*"))
     n_iter = len(img_list) // args.batch_size
-
-    print(n_iter)
 
     eii = ExternalInputIterator(args.batch_size, img_list=img_list)
 

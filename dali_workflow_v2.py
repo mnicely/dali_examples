@@ -43,7 +43,7 @@ import multiprocessing as mp
 import os
 from glob import glob
 
-import sunpy.map
+from astropy.io import fits
 
 import nvidia.dali.ops as ops
 from nvidia.dali.pipeline import Pipeline
@@ -68,9 +68,11 @@ class ExternalInputIterator(object):
         batch = []
         for _ in range(self.batch_size):
             fits_filename = self.files[self.i]
-            f = sunpy.map.Map(fits_filename)
-            print(self.i, fits_filename)
-            batch.append(f.data)
+            with fits.open(fits_filename) as hdul:
+                hdul[1].verify('silentfix+warn')  # oftentimes the headers are broken; fix them or astropy will complain
+                data = hdul[1].data
+            # print(self.i, fits_filename)
+            batch.append(data)
             self.i = (self.i + 1) % self.n
 
         return (batch,)
